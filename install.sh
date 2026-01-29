@@ -48,6 +48,28 @@ loading() {
     done
     echo -e "${NC}\n"
 }
+#Check user token
+check_token() {
+  echo -e "                                                       "
+  echo -e "${BLUE}[+] =============================================== [+]${NC}"
+  echo -e "${BLUE}[+]               LICENSE SANO OFFICIAL            [+]${NC}"
+  echo -e "${BLUE}[+] =============================================== [+]${NC}"
+  echo -e "                                                       "
+  echo -e "${YELLOW}MASUKKAN AKSES TOKEN: ${NC}"
+  read -r USER_TOKEN
+
+  if [ "$USER_TOKEN" = "fajarofc" ]; then
+    echo -e "${GREEN}AKSES BERHASIL${NC}}"
+  else
+    echo -e "${GREEN}Token Salah! Beli Kode Token Di fajar Official${NC}"
+    echo -e "${YELLOW}TELEGRAM : @fajarofficial${NC}"
+    echo -e "${YELLOW}WHATSAPP : +628811740019${NC}"
+    echo -e "${YELLOW}HARGA TOKEN : 10K FREE UPDATE JIKA ADA TOKEN BARU${NC}"
+    echo -e "${YELLOW}© Sfajar OFFICIAL${NC}"
+    exit 1
+  fi
+  clear
+}
 while true; do
 clear
 show_header
