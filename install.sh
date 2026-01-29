@@ -154,11 +154,21 @@ server {
 }
 EOF
 
+
+echo -e "${BLUE}[INFO]${NC} Konfirugasi File & Merestart nginx..."
   sudo ln -s /etc/nginx/sites-available/phpmyadmin.conf /etc/nginx/sites-enabled/phpmyadmin.conf
 
   systemctl restart nginx
 
-  echo -e "${GREEN}phpMyAdmin BERHASIL di install!${NC}"
+  echo -e "${GREEN}╔══════════════════════════════════════════╗${NC}"
+    echo -e "${GREEN}║     INSTALLASI BERHASIL DILAKUKAN!       ║${NC}"
+    echo -e "${GREEN}╚══════════════════════════════════════════╝${NC}"
+    echo -e "\n${WHITE}Detail Installasi:${NC}"
+    echo -e "${CYAN}──────────────────────────────────────${NC}"
+    echo -e "${YELLOW}URL:${NC} https://$domain"
+    echo -e "${YELLOW}Direktori:${NC} /var/www/phpmyadmin"
+    echo -e "${YELLOW}Config:${NC} /etc/nginx/sites-available/phpmyadmin.conf"
+    echo -e "${CYAN}──────────────────────────────────────${NC}"
 ;;
 
 2)
@@ -178,10 +188,29 @@ EOF
 
 3)
  read -p "Domain Php:" phpweb
+show_header
+echo -e "${RED}╔══════════════════════════════════════════╗${NC}"
+    echo -e "${RED}║           UNINSTALL PHPMYADMIN           ║${NC}"
+    echo -e "${RED}╚══════════════════════════════════════════╝${NC}\n"
+
+    
+ echo -e "${YELLOW}[PERINGATAN]${NC} Ini akan menghapus phpMyAdmin dan konfigurasinya!\n"
+
+ echo -e "${BLUE}[INFO]${NC} Menghapus direktori phpMyAdmin..."
   rm -rf /var/www/phpmyadmin
+
+  
+  echo -e "${BLUE}[INFO]${NC} Menghapus konfigurasi Nginx..."
   rm -f /etc/nginx/sites-available/phpmyadmin.conf
+
+  echo -e "${BLUE}[INFO]${NC} Menghapus symlink Nginx..."
   rm -f /etc/nginx/sites-enabled/phpmyadmin.conf
+
+
+echo -e "${BLUE}[INFO]${NC} Menghapus SSL certificate..."
 sudo certbot delete $phpweb
+
+echo -e "${BLUE}[INFO]${NC} Merestart Nginx..."
   systemctl restart nginx
 
   echo -e "${GREEN}phpMyAdmin BERHASIL DIHAPUS${NC}"
